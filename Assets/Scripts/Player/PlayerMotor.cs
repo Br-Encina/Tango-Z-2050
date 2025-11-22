@@ -29,17 +29,20 @@ public class PlayerMotor : MonoBehaviour
     }
 
     public void ApplyJump()
-    {
-        Vector3 vel = rb.linearVelocity;
-        vel.y = jumpForce;
-        rb.linearVelocity = vel;
+    { if (IsGrounded() == true && rb != null)
+        {
+            Vector3 vel = rb.linearVelocity;
+            vel.y = jumpForce;
+            rb.linearVelocity = vel;
+        }
     }
 
     public bool IsGrounded()
     {
-        return Physics.Raycast(transform.position + Vector3.up * 0.1f,
-                               Vector3.down,
-                               0.2f);
+        float rayLength = 1f;
+        Vector3 origin = transform.position + Vector3.up * 0.1f;
+
+        return Physics.Raycast(origin, Vector3.down, rayLength);
     }
 
     public float VerticalVelocity()
