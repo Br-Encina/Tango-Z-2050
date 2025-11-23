@@ -5,14 +5,14 @@ public class PlayerStateMachine : MonoBehaviour
 {
     InputSystem_Actions action;
     CharacterController characterController;
+    public CharacterController CharacterController { get { return characterController; } }
     Animator animator;
 
     int isWalkingHash;
     int isRunningHash;
 
     Vector2 currentMovementInput;
-    Vector3 CurrentMovement;
-    Vector3 currentRunMovement;
+    Vector3 currentMovement;
     Vector3 appliedMovement;
 
     float movementSpeed = 2f;
@@ -31,12 +31,30 @@ public class PlayerStateMachine : MonoBehaviour
     float maxJumpTime = 0.75f;
     bool isJumping = false;
     int isJumpingHash;
-    bool isJumpAnim = false;
+    bool requireNewJumpPress = false;
+    public bool RequireNewJumpPress { get { return requireNewJumpPress; } set { requireNewJumpPress = value; } }
+    public bool IsJumping { get { return isJumping; } set { isJumping = value; } }
+    public int IsJumpingHash { get { return isJumpingHash; } }
+    public bool IsJumpPressed { get { return isJumpPressed; } set { isJumpPressed = value; } }
+    public float CurrentMovementY { get { return currentMovement.y; } set { currentMovement.y = value; } }
+
+    public float ApliedMovementY { get { return appliedMovement.y; } set { appliedMovement.y = value; } }
+
+    public Animator Animator { get { return animator; } }
+
+    public float InitialJumpVelocity { get { return initialJumpVelocity; } }
+
+    public float Gravity { get { return gravity; } }
+    public float GroundedGravity { get { return groundedGravity; } }
+
 
 
     PlayerBaseState currentState;
     public PlayerBaseState CurrentState { get { return currentState; } set { currentState = value; } }
+   
     PlayerStateFactory states;
+
+  
 
 
 
@@ -78,6 +96,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
 
         handleRotatio();
+        currentState.UpdateState();
 
         characterController.Move(appliedMovement * Time.deltaTime);
 
@@ -97,9 +116,9 @@ public class PlayerStateMachine : MonoBehaviour
     {
         Vector3 positionTolookAt;
 
-        positionTolookAt.x = CurrentMovement.x;
+        positionTolookAt.x = currentMovement.x;
         positionTolookAt.y = 0.0f;
-        positionTolookAt.z = CurrentMovement.z;
+        positionTolookAt.z = currentMovement.z;
 
         Quaternion currentRotation = transform.rotation;
 
@@ -128,6 +147,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             isJumpPressed = true;
         }
+        requireNewJumpPress = false;
     }
 
     void onRun(InputAction.CallbackContext context)
@@ -137,8 +157,8 @@ public class PlayerStateMachine : MonoBehaviour
     void onMovementInput(InputAction.CallbackContext context)
     {
         currentMovementInput = context.ReadValue<Vector2>();
-        CurrentMovement.z = currentMovementInput.x * movementSpeed;
-        //currentRunMovement.z = currentMovementInput.x * runMultipler;
+        currentMovement.z = currentMovementInput.x * movementSpeed;
+        appliedMovement.z = currentMovementInput.x * runMultipler;
         
         IsMovementPressed = currentMovementInput.x != 0;
     }

@@ -4,6 +4,8 @@ public abstract class PlayerBaseState
 {
     protected PlayerStateMachine _ctx;
     protected PlayerStateFactory _factory;
+    protected PlayerBaseState _currentSuperState;
+    protected PlayerBaseState _currentSubState;
     public PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
     {
         _ctx = currentContext;
@@ -21,7 +23,7 @@ public abstract class PlayerBaseState
         CheckSwichStates();
     }
 
-    void SwitchState(PlayerBaseState newState)
+    protected void SwitchState(PlayerBaseState newState)
     {
         ExitState();
         newState.EnterState();
@@ -30,14 +32,17 @@ public abstract class PlayerBaseState
 
     }
 
-    void SetSuperState(PlayerBaseState newState)
+    protected void SetSuperState(PlayerBaseState newSuperState)
     {
         // Implementation for setting the super state
+        _currentSuperState = newSuperState;
     }
 
-    void SetSubState(PlayerBaseState newState)
+    protected void SetSubState(PlayerBaseState newSubState)
     {
         // Implementation for setting the sub state
+        _currentSubState = newSubState;
+        newSubState.SetSuperState(this);
     }
 
 }

@@ -13,7 +13,7 @@ public class PlayerWalkState : PlayerBaseState
     }
     public override void UpdateState()
     {
-
+        CheckSwichStates();
     }
     public override void ExitState()
     {

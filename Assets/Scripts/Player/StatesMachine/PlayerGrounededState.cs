@@ -9,11 +9,12 @@ public class PlayerGrounededState : PlayerBaseState
     }
     public override void EnterState()
     {
-        Debug.Log("Entered Grounded State");
+        _ctx.CurrentMovementY = _ctx.GroundedGravity;
+        _ctx.ApliedMovementY = _ctx.GroundedGravity;
     }
     public override void UpdateState()
     {
-
+        CheckSwichStates();
     }
     public override void ExitState()
     {
@@ -21,8 +22,13 @@ public class PlayerGrounededState : PlayerBaseState
     }
     public override void CheckSwichStates()
     {
+        if (_ctx.IsJumpPressed)
+        {
+            SwitchState(_factory.Jump());
+        }
     }
     public override void InitializeSubState()
     {
+
     }
 }
