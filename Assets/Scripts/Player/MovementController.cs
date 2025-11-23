@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering.LookDev;
@@ -17,11 +17,12 @@ public class MovementController : MonoBehaviour
     Vector3 currentRunMovement;
     
     bool IsMovementPressed;
+    float movementSpeed = 2f;
     bool isRunPressed;
     float rotationFactorPerFrame = 1.0f;
     float runMultipler = 3f;
 
-    float gravity = -9.8f;
+    float gravity = -5f;
     float groundedGravity = -0.05f;
 
     bool isJumpPressed = false;
@@ -65,24 +66,13 @@ public class MovementController : MonoBehaviour
 
     void handleJump()
     {
-        //if (!isJumping && characterController.isGrounded && isJumpPressed)
-        //{
-        //    animator.SetBool(isJumpingHash, true);
-        //    isJumpAnim = true;
-        //    isJumping = true;
-        //    CurrentMovement.y = initialJumpVelocity;
-        //    currentRunMovement.y = initialJumpVelocity;
-        //}
-        //else if (isJumping && !isJumpPressed && characterController.isGrounded)
-        //{
-        //    isJumping = false;
-        //}
+  
 
         if (characterController.isGrounded)
         {
-            if (isJumpPressed) // solo se activa cuando se presiona el botÛn
+            if (isJumpPressed) // solo se activa cuando se presiona el bot√≥n
             {
-                isJumpPressed = false; // lo consumimos ac· mismo
+                isJumpPressed = false; // lo consumimos ac√° mismo
                 isJumping = true;
                 isJumpAnim = true;
 
@@ -125,7 +115,7 @@ public class MovementController : MonoBehaviour
     void onMovementInput(InputAction.CallbackContext context)
     {
         currentMovementInput = context.ReadValue<Vector2>();
-        CurrentMovement.z = currentMovementInput.x;
+        CurrentMovement.z = currentMovementInput.x * movementSpeed;
         currentRunMovement.z = currentMovementInput.x * runMultipler;
         //CurrentMovement.z = currentMovementInput.y;
         IsMovementPressed = currentMovementInput.x != 0; /*|| currentMovementInput.y != 0;*/
