@@ -23,7 +23,7 @@ public class PlayerStateMachine : MonoBehaviour
     int zero = 0; 
 
     float gravity = -9.8f;
-    float groundedGravity = -0.05f;
+    
 
     bool isJumpPressed = false;
     float initialJumpVelocity;
@@ -41,7 +41,7 @@ public class PlayerStateMachine : MonoBehaviour
     public Animator Animator { get { return animator; } }
     public float InitialJumpVelocity { get { return initialJumpVelocity; } }
     public float Gravity { get { return gravity; } }
-    public float GroundedGravity { get { return groundedGravity; } }
+    
     public bool IsRunPressed { get { return isRunPressed; } }
     public bool IsMovementPressed { get { return isMovementPressed; } }
     public int IsWalkingHash { get { return isWalkingHash; } }
@@ -61,7 +61,9 @@ public class PlayerStateMachine : MonoBehaviour
    
     PlayerStateFactory states;
 
-  
+    public string newcurrentState;
+
+
 
 
 
@@ -95,17 +97,17 @@ public class PlayerStateMachine : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        characterController.Move(appliedMovement * Time.deltaTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
         handleRotatio();
-        currentState.UpdateStates();
 
         characterController.Move(appliedMovement * Time.deltaTime);
+        currentState.UpdateStates();
 
         //if (isRunPressed)
         //{
@@ -115,7 +117,7 @@ public class PlayerStateMachine : MonoBehaviour
         //{
         //    characterController.Move(CurrentMovement * Time.deltaTime);
         //}
-
+        OnSwithState(currentState);
 
 
     }
@@ -154,7 +156,11 @@ public class PlayerStateMachine : MonoBehaviour
         {
             isJumpPressed = true;
         }
-        requireNewJumpPress = false;
+        else if (context.canceled)
+        {
+            isJumpPressed = false;
+            requireNewJumpPress = false;
+        }
     }
 
     void onRun(InputAction.CallbackContext context)
@@ -179,4 +185,15 @@ public class PlayerStateMachine : MonoBehaviour
     {
         action.Player.Disable();
     }
+
+    void OnSwithState(PlayerBaseState currentState)
+    {
+        if(newcurrentState != currentState.GetType().Name)
+        {
+            newcurrentState = currentState.GetType().Name;
+            Debug.Log("Current Player State: " + newcurrentState);
+        }
+    }
+
+
 }

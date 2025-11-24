@@ -8,14 +8,14 @@ public class PlayerRunState : PlayerBaseState
     }
     public override void EnterState()
     {
-        _ctx.Animator.SetBool(_ctx.IsWalkingHash, false);
-        _ctx.Animator.SetBool(_ctx.IsRunningHash, true);
+        Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
+        Ctx.Animator.SetBool(Ctx.IsRunningHash, true);
 
     }
     public override void UpdateState()
     {
+        Ctx.ApliedMovementZ = Ctx.CurrentMovementInput.x * Ctx.RunMultipler;
         CheckSwichStates();
-        _ctx.ApliedMovementZ = _ctx.CurrentMovementInput.x * _ctx.RunMultipler;
     }
     public override void ExitState()
     {
@@ -23,13 +23,13 @@ public class PlayerRunState : PlayerBaseState
     }
     public override void CheckSwichStates()
     {
-        if (!_ctx.IsMovementPressed)
+        if (!Ctx.IsMovementPressed)
         {
-            SwitchState(_factory.Idle());
+            SwitchState(Factory.Idle());
         }
-        else if (_ctx.IsMovementPressed && !_ctx.IsRunPressed)
+        else if (Ctx.IsMovementPressed && !Ctx.IsRunPressed)
         {
-            SwitchState(_factory.Walk());
+            SwitchState(Factory.Walk());
         }
     }
     public override void InitializeSubState()

@@ -1,86 +1,102 @@
 using UnityEngine;
 
-public class PlayerJumpState : PlayerBaseState
+public class PlayerJumpState : PlayerBaseState, IRootState
 {
 
     public PlayerJumpState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory) : base(currentContext, playerStateFactory)
     {
-        InitializeSubState();
+        IsRootState = true;
+       
     }
     public override void EnterState()
     {
+        InitializeSubState();
         HandleJump();
 
     }
     public override void UpdateState()
     {
-        CheckSwichStates();
         HandleGravity();
+        CheckSwichStates();
     }
     public override void ExitState()
     {
-        _ctx.Animator.SetBool(_ctx.IsJumpingHash, false);
-        //_ctx.IsJumpAnim = false;
-        if (_ctx.IsJumpPressed)
-        {
-            _ctx.RequireNewJumpPress = true;
-        }
+        Ctx.Animator.SetBool(Ctx.IsJumpingHash, false);
+        
+        //if (Ctx.IsJumpPressed)
+        //{
+        //    Ctx.RequireNewJumpPress = true;
+        //}
     }
     public override void CheckSwichStates()
     {
-        if (_ctx.CharacterController.isGrounded)
+        if (Ctx.CharacterController.isGrounded)
         {
-            SwitchState(_factory.Grounded());
+            SwitchState(Factory.Grounded());
         }
     }
     public override void InitializeSubState()
     {
-        if (_ctx.IsMovementPressed && !_ctx.IsRunPressed)
+        if (Ctx.IsMovementPressed && !Ctx.IsRunPressed)
         {
-            SetSubState(_factory.Walk());
+            SetSubState(Factory.Walk());
         }
-        else if (_ctx.IsMovementPressed && _ctx.IsRunPressed)
+        else if (Ctx.IsMovementPressed && Ctx.IsRunPressed)
         {
-            SetSubState(_factory.Run());
+            SetSubState(Factory.Run());
         }
         else
         {
-            SetSubState(_factory.Idle());
+            SetSubState(Factory.Idle());
         }
     }
 
     void HandleJump()
     {
-            _ctx.IsJumpPressed = false; 
-            _ctx.IsJumping = true;
-            _ctx.RequireNewJumpPress = true;
+            Ctx.IsJumpPressed = false; 
+            Ctx.IsJumping = true;
+            Ctx.RequireNewJumpPress = true;
 
-            _ctx.Animator.SetBool(_ctx.IsJumpingHash, true);
+            Ctx.Animator.SetBool(Ctx.IsJumpingHash, true);
 
-            _ctx.CurrentMovementY = _ctx.InitialJumpVelocity;
-            _ctx.ApliedMovementY = _ctx.InitialJumpVelocity;
+            Ctx.CurrentMovementY = Ctx.InitialJumpVelocity;
+            Ctx.ApliedMovementY = Ctx.InitialJumpVelocity;
         
        
 
     }
 
-    void HandleGravity()
+    public void HandleGravity()
     {
-        bool isFalling = _ctx.CurrentMovementY > 0f || !_ctx.IsJumpPressed;
+        bool isFalling = Ctx.CurrentMovementY <= 0f;
         float fallMultiplier = 2.0f;
-        float previousY = _ctx.CurrentMovementY;
+        float previousY = Ctx.CurrentMovementY;
 
         if (isFalling)
         {
-            
-            _ctx.CurrentMovementY = _ctx.CurrentMovementY + (_ctx.Gravity * fallMultiplier * Time.deltaTime);
-            _ctx.ApliedMovementY = Mathf.Max((previousY + _ctx.CurrentMovementY) * 0.5f, -20f);
+
+           Ctx.CurrentMovementY = Ctx.CurrentMovementY + (Ctx.Gravity * fallMultiplier * Time.deltaTime);
+           Ctx.ApliedMovementY = Mathf.Max((previousY + Ctx.CurrentMovementY) * 0.5f, -20f);
         }
-        else if(_ctx.CurrentMovementY > _ctx.Gravity)
+        else if(Ctx.CurrentMovementY > Ctx.Gravity)
         {
-            _ctx.CurrentMovementY += _ctx.Gravity * Time.deltaTime;
-            _ctx.ApliedMovementY = (previousY + _ctx.CurrentMovementY) * 0.5f;
+            Ctx.CurrentMovementY += Ctx.Gravity * Time.deltaTime;
+            Ctx.ApliedMovementY = (previousY + Ctx.CurrentMovementY) * 0.5f;
         }
+
+        //if (isFalling)
+        //{
+        //    // Caída acelerada
+        //    Ctx.CurrentMovementY += Ctx.Gravity * fallMultiplier * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    // Subida normal
+        //    Ctx.CurrentMovementY += Ctx.Gravity * Time.deltaTime;
+        //}
+
+        //// Movimiento aplicado
+        //Ctx.ApliedMovementY = (previousY + Ctx.CurrentMovementY) * 0.5f;
 
     }
 }

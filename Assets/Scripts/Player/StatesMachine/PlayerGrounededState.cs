@@ -1,16 +1,30 @@
 using UnityEngine;
 
-public class PlayerGrounededState : PlayerBaseState
+public class PlayerGrounededState : PlayerBaseState, IRootState
 {
+
+    float notGroundedTimer = 0f;
+    const float notGroundedThreshold = 0.06f;
 
     public PlayerGrounededState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory) : base(currentContext, playerStateFactory)
     {
-       InitializeSubState();
+       IsRootState = true;
+       
+    }
+    public void HandleGravity()
+    {
+       
+        
+            Ctx.CurrentMovementY = Ctx.Gravity;
+            Ctx.ApliedMovementY = Ctx.Gravity;
+        
     }
     public override void EnterState()
     {
-        _ctx.CurrentMovementY = _ctx.GroundedGravity;
-        _ctx.ApliedMovementY = _ctx.GroundedGravity;
+        InitializeSubState();
+        //HandleGravity();
+        Ctx.CurrentMovementY = Mathf.Min(Ctx.CurrentMovementY, Ctx.Gravity);
+        notGroundedTimer = 0f;
     }
     public override void UpdateState()
     {
@@ -23,24 +37,48 @@ public class PlayerGrounededState : PlayerBaseState
 
     public override void CheckSwichStates()
     {
-        if (_ctx.IsJumpPressed && !_ctx.RequireNewJumpPress)
+        //if (Ctx.IsJumpPressed && !Ctx.RequireNewJumpPress)
+        //{
+        //    SwitchState(Factory.Jump());
+        //}
+        //else if (!Ctx.CharacterController.isGrounded)
+        //{
+        //    SwitchState(Factory.Fall());
+        //}
+        if (Ctx.IsJumpPressed && !Ctx.RequireNewJumpPress)
         {
-            SwitchState(_factory.Jump());
+            SwitchState(Factory.Jump());
+            return;
+        }
+
+        // Si ya dejamos de estar grounded, esperamos un pequeño tiempo antes de cambiar a Fall
+        if (!Ctx.CharacterController.isGrounded)
+        {
+            notGroundedTimer += Time.deltaTime;
+            if (notGroundedTimer >= notGroundedThreshold)
+            {
+                SwitchState(Factory.Fall());
+                return;
+            }
+        }
+        else
+        {
+            notGroundedTimer = 0f;
         }
     }
     public override void InitializeSubState()
     {
-        if (_ctx.IsMovementPressed && !_ctx.IsRunPressed)
+        if (Ctx.IsMovementPressed && !Ctx.IsRunPressed)
         {
-            SetSubState(_factory.Walk());
+            SetSubState(Factory.Walk());
         }
-        else if (_ctx.IsMovementPressed && _ctx.IsRunPressed)
+        else if (Ctx.IsMovementPressed && Ctx.IsRunPressed)
         {
-            SetSubState(_factory.Run());
+            SetSubState(Factory.Run());
         }
         else
         {
-            SetSubState(_factory.Idle());
+            SetSubState(Factory.Idle());
         }
     }
 }
