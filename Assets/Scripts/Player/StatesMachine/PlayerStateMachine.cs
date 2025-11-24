@@ -16,7 +16,7 @@ public class PlayerStateMachine : MonoBehaviour
     Vector3 appliedMovement;
 
     float movementSpeed = 2f;
-    bool IsMovementPressed;
+    bool isMovementPressed;
     bool isRunPressed;
     float rotationFactorPerFrame = 1.0f;
     float runMultipler = 3f;
@@ -37,15 +37,22 @@ public class PlayerStateMachine : MonoBehaviour
     public int IsJumpingHash { get { return isJumpingHash; } }
     public bool IsJumpPressed { get { return isJumpPressed; } set { isJumpPressed = value; } }
     public float CurrentMovementY { get { return currentMovement.y; } set { currentMovement.y = value; } }
-
     public float ApliedMovementY { get { return appliedMovement.y; } set { appliedMovement.y = value; } }
-
     public Animator Animator { get { return animator; } }
-
     public float InitialJumpVelocity { get { return initialJumpVelocity; } }
-
     public float Gravity { get { return gravity; } }
     public float GroundedGravity { get { return groundedGravity; } }
+    public bool IsRunPressed { get { return isRunPressed; } }
+    public bool IsMovementPressed { get { return isMovementPressed; } }
+    public int IsWalkingHash { get { return isWalkingHash; } }
+    public int IsRunningHash { get { return isRunningHash; } }
+
+    public float ApliedMovementZ { get { return appliedMovement.z; } set { appliedMovement.z = value; } }
+    public Vector3 CurrentMovementInput { get { return currentMovementInput; } }
+    public float RunMultipler { get { return runMultipler; } }
+
+
+
 
 
 
@@ -96,7 +103,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
 
         handleRotatio();
-        currentState.UpdateState();
+        currentState.UpdateStates();
 
         characterController.Move(appliedMovement * Time.deltaTime);
 
@@ -124,7 +131,7 @@ public class PlayerStateMachine : MonoBehaviour
 
 
 
-        if (IsMovementPressed)
+        if (isMovementPressed)
         {
             Quaternion targetRotation = Quaternion.LookRotation(positionTolookAt);
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame);
@@ -160,7 +167,7 @@ public class PlayerStateMachine : MonoBehaviour
         currentMovement.z = currentMovementInput.x * movementSpeed;
         appliedMovement.z = currentMovementInput.x * runMultipler;
         
-        IsMovementPressed = currentMovementInput.x != 0;
+        isMovementPressed = currentMovementInput.x != 0;
     }
 
     private void OnEnable()

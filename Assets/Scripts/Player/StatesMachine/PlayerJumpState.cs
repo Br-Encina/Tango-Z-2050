@@ -5,7 +5,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public PlayerJumpState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory) : base(currentContext, playerStateFactory)
     {
-
+        InitializeSubState();
     }
     public override void EnterState()
     {
@@ -35,6 +35,18 @@ public class PlayerJumpState : PlayerBaseState
     }
     public override void InitializeSubState()
     {
+        if (_ctx.IsMovementPressed && !_ctx.IsRunPressed)
+        {
+            SetSubState(_factory.Walk());
+        }
+        else if (_ctx.IsMovementPressed && _ctx.IsRunPressed)
+        {
+            SetSubState(_factory.Run());
+        }
+        else
+        {
+            SetSubState(_factory.Idle());
+        }
     }
 
     void HandleJump()

@@ -17,9 +17,13 @@ public abstract class PlayerBaseState
     public abstract void CheckSwichStates();
     public abstract void InitializeSubState();
 
-    void UpdateStates()
+    public void UpdateStates()
     {
         UpdateState();
+        if (_currentSubState != null)
+        {
+            _currentSubState.UpdateStates();
+        }
         CheckSwichStates();
     }
 

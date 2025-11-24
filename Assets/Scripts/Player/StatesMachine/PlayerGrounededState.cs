@@ -5,7 +5,7 @@ public class PlayerGrounededState : PlayerBaseState
 
     public PlayerGrounededState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory) : base(currentContext, playerStateFactory)
     {
-       
+       InitializeSubState();
     }
     public override void EnterState()
     {
@@ -18,17 +18,29 @@ public class PlayerGrounededState : PlayerBaseState
     }
     public override void ExitState()
     {
-
+       
     }
+
     public override void CheckSwichStates()
     {
-        if (_ctx.IsJumpPressed)
+        if (_ctx.IsJumpPressed && !_ctx.RequireNewJumpPress)
         {
             SwitchState(_factory.Jump());
         }
     }
     public override void InitializeSubState()
     {
-
+        if (_ctx.IsMovementPressed && !_ctx.IsRunPressed)
+        {
+            SetSubState(_factory.Walk());
+        }
+        else if (_ctx.IsMovementPressed && _ctx.IsRunPressed)
+        {
+            SetSubState(_factory.Run());
+        }
+        else
+        {
+            SetSubState(_factory.Idle());
+        }
     }
 }
