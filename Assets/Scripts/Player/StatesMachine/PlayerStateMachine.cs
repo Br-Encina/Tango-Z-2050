@@ -20,8 +20,6 @@ public class PlayerStateMachine : MonoBehaviour
     bool isRunPressed;
     float rotationFactorPerFrame = 1.0f;
     float runMultipler = 3f;
-    int zero = 0; 
-
     float gravity = -9.8f;
     
 
@@ -50,6 +48,19 @@ public class PlayerStateMachine : MonoBehaviour
     public float ApliedMovementZ { get { return appliedMovement.z; } set { appliedMovement.z = value; } }
     public Vector3 CurrentMovementInput { get { return currentMovementInput; } }
     public float RunMultipler { get { return runMultipler; } }
+
+    //Push Box Interaction
+    bool isPushPressed = false;
+    public bool IsPushPressed { get { return isPushPressed; } }
+    bool isTouchingPushBox = false;
+    public bool IsTouchingPushBox { get { return isTouchingPushBox; } set { isTouchingPushBox = value; } }
+    PushableBox currentPushBox;
+    public PushableBox CurrentPushBox { get { return currentPushBox; } }
+    float pushSpeed = 1.2f;
+    public float PushSpeed { get { return pushSpeed; } }
+
+    int isPushingHash;
+    public int IsPushingHash { get { return isPushingHash; } set { isPushingHash = value; } }
 
 
 
@@ -88,6 +99,8 @@ public class PlayerStateMachine : MonoBehaviour
         action.Player.Sprint.canceled += onRun;
         action.Player.Jump.started += onJump;
         action.Player.Jump.canceled += onJump;
+        action.Player.Push.started += onPush;
+        action.Player.Push.canceled += onPush;
 
 
         setupJumpVariables();
@@ -104,6 +117,8 @@ public class PlayerStateMachine : MonoBehaviour
     void Update()
     {
         
+
+
         handleRotatio();
 
         characterController.Move(appliedMovement * Time.deltaTime);
@@ -117,6 +132,7 @@ public class PlayerStateMachine : MonoBehaviour
         //{
         //    characterController.Move(CurrentMovement * Time.deltaTime);
         //}
+        DetectPushableBox();
         OnSwithState(currentState);
 
 
@@ -145,6 +161,30 @@ public class PlayerStateMachine : MonoBehaviour
         float timeToApex = maxJumpTime / 2;
         gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+    }
+
+    void onPush(InputAction.CallbackContext context)
+    {
+        isPushPressed = context.ReadValueAsButton();
+    }
+    void DetectPushableBox()
+    {
+        Vector3 origin = transform.position + Vector3.up * 1f;
+        Vector3 direction = transform.forward;
+        float distance = 0.7f;
+
+        if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
+        {
+            if (hit.collider.TryGetComponent(out PushableBox pushBox))
+            {
+                isTouchingPushBox = true;
+                currentPushBox = pushBox;
+                return;
+            }
+        }
+
+        isTouchingPushBox = false;
+        currentPushBox = null;
     }
 
     void onJump(InputAction.CallbackContext context)

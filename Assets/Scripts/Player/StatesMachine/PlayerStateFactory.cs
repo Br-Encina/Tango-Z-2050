@@ -9,7 +9,8 @@ enum PlayerStates
     Jump,
     Run,
     Walk,
-    Fall
+    Fall,
+    Push
 }
 
 public class PlayerStateFactory 
@@ -26,6 +27,7 @@ public class PlayerStateFactory
         _states[PlayerStates.Run] = new PlayerRunState(_context, this);
         _states[PlayerStates.Walk] = new PlayerWalkState(_context, this);
         _states[PlayerStates.Fall] = new PlayerFallState(_context, this);
+        _states[PlayerStates.Push] = new PlayerPushState(_context, this);
 
     }
 
@@ -52,5 +54,9 @@ public class PlayerStateFactory
     public PlayerBaseState Fall()
     {
         return _states[PlayerStates.Fall];
+    }
+    public PlayerBaseState Push()
+    {
+        return _states[PlayerStates.Push];
     }
 }

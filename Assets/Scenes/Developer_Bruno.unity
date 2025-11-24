@@ -592,6 +592,8 @@ GameObject:
   - component: {fileID: 1380505906}
   - component: {fileID: 1380505905}
   - component: {fileID: 1380505904}
+  - component: {fileID: 1380505909}
+  - component: {fileID: 1380505908}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -691,6 +693,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1380505908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380505903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3fcd56dd1c4e1e439a630c89430e944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PushableBox
+  pushForce: 5
+--- !u!54 &1380505909
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380505903}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1819315467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -709,7 +751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 52a956ff3ec893243ab7d22ed332a9dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.76
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 52a956ff3ec893243ab7d22ed332a9dd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -815,6 +857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79af2df540d39940b3e0541c6d89a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateMachine
+  newcurrentState: 
 --- !u!1 &1966857056
 GameObject:
   m_ObjectHideFlags: 0

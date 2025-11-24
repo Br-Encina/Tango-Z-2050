@@ -61,6 +61,11 @@ public class PlayerGrounededState : PlayerBaseState, IRootState
                 return;
             }
         }
+        else if (Ctx.IsTouchingPushBox && Ctx.IsPushPressed && Ctx.IsMovementPressed)
+        {
+            SwitchState(Factory.Push());
+            return;
+        }
         else
         {
             notGroundedTimer = 0f;
