@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Splines;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class PlayerStateMachine : MonoBehaviour
     CharacterController characterController;
     public CharacterController CharacterController { get { return characterController; } }
     Animator animator;
+
+    [SerializeField] Transform spine2;
+    public Transform Spine2 { get { return spine2; } set { spine2 = value; } }
 
     #region Movement Variables
 
@@ -57,6 +61,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float InitialJumpVelocity { get { return initialJumpVelocity; } }
     #endregion
 
+
     #region Push Box Interaction
     bool isPushPressed = false;
     public bool IsPushPressed { get { return isPushPressed; } }
@@ -105,6 +110,7 @@ public class PlayerStateMachine : MonoBehaviour
         action = new InputSystem_Actions();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        
 
         states = new PlayerStateFactory(this);
         currentState = states.Grounded();
@@ -115,7 +121,7 @@ public class PlayerStateMachine : MonoBehaviour
         isJumpingHash = Animator.StringToHash("isJumping");
         isPushingHash = Animator.StringToHash("isPushing");
         isAimingHash = Animator.StringToHash("isAiming");
-        shootTriggerHash = Animator.StringToHash("shootTrigger");
+        //shootTriggerHash = Animator.StringToHash("shootTrigger");
 
 
         action.Player.Move.started += onMovementInput;

@@ -72,6 +72,12 @@ public class PlayerGrounededState : PlayerBaseState, IRootState
             return;
         }
 
+        if (Ctx.IsAimPressed)
+        {
+            SwitchState(Factory.Aim());
+            return;
+        }
+
     }
     public override void InitializeSubState()
     {

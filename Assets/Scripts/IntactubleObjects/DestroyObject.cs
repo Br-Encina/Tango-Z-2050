@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class DestroyObject : MonoBehaviour
+public class DestroyObject : MonoBehaviour, IInteractuable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void OnShootHit()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Destroy(gameObject);
     }
 }

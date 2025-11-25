@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerAimState : PlayerBaseState/*, IRootState*/
 {
+
+    float armSpeed;
+    float armAngle;
     public PlayerAimState(PlayerStateMachine ctx, PlayerStateFactory factory)
         : base(ctx, factory)
     {
@@ -18,7 +21,10 @@ public class PlayerAimState : PlayerBaseState/*, IRootState*/
 
     public override void UpdateState()
     {
+        Ctx.ApliedMovementZ = 0;
+        
         RotateArmsTowardMouse();
+        RotateArms();
         CheckSwichStates();
     }
 
@@ -55,11 +61,21 @@ public class PlayerAimState : PlayerBaseState/*, IRootState*/
             Vector3 dir = hitPoint - Ctx.transform.position;
             dir.y = 0;
 
-            Ctx.transform.rotation = Quaternion.Slerp(
-                Ctx.transform.rotation,
-                Quaternion.LookRotation(dir),
-                10 * Time.deltaTime
-            );
+            //Ctx.transform.rotation = Quaternion.Slerp(
+            //    Ctx.transform.rotation,
+            //    Quaternion.LookRotation(dir),
+            //    10 * Time.deltaTime
+            //);
         }
+
+
+    }
+
+    void RotateArms()
+    {
+        armAngle += Input.GetAxis("Mouse Y") * armSpeed * Time.deltaTime;
+        armAngle = Mathf.Clamp(armAngle, -10f, 10f);
+        Ctx.Spine2.localRotation = Quaternion.Euler(-armAngle,0f,0f);
+
     }
 }
