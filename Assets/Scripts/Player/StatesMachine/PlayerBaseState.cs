@@ -14,7 +14,7 @@ public abstract class PlayerBaseState
     public PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
     {
         _ctx = currentContext;
-        _factory = playerStateFactory;
+        _factory = playerStateFactory;  
     }
     public abstract void EnterState();
     public abstract void UpdateState();

@@ -35,6 +35,7 @@ public class PlayerStateMachine : MonoBehaviour
     public int IsJumpingHash { get { return isJumpingHash; } }
     public bool IsJumpPressed { get { return isJumpPressed; } set { isJumpPressed = value; } }
     public float CurrentMovementY { get { return currentMovement.y; } set { currentMovement.y = value; } }
+    public float CurrentMovementZ { get { return currentMovement.z; } set { currentMovement.z = value; } }
     public float ApliedMovementY { get { return appliedMovement.y; } set { appliedMovement.y = value; } }
     public Animator Animator { get { return animator; } }
     public float InitialJumpVelocity { get { return initialJumpVelocity; } }
@@ -56,6 +57,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsTouchingPushBox { get { return isTouchingPushBox; } set { isTouchingPushBox = value; } }
     PushableBox currentPushBox;
     public PushableBox CurrentPushBox { get { return currentPushBox; } }
+
     float pushSpeed = 1.2f;
     public float PushSpeed { get { return pushSpeed; } }
 
@@ -91,6 +93,7 @@ public class PlayerStateMachine : MonoBehaviour
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
         isJumpingHash = Animator.StringToHash("isJumping");
+        isPushingHash = Animator.StringToHash("isPushing");
 
         action.Player.Move.started += onMovementInput;
         action.Player.Move.canceled += onMovementInput;
@@ -123,15 +126,6 @@ public class PlayerStateMachine : MonoBehaviour
 
         characterController.Move(appliedMovement * Time.deltaTime);
         currentState.UpdateStates();
-
-        //if (isRunPressed)
-        //{
-        //    characterController.Move(currentRunMovement * Time.deltaTime);
-        //}
-        //else
-        //{
-        //    characterController.Move(CurrentMovement * Time.deltaTime);
-        //}
         DetectPushableBox();
         OnSwithState(currentState);
 
@@ -171,7 +165,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         Vector3 origin = transform.position + Vector3.up * 1f;
         Vector3 direction = transform.forward;
-        float distance = 0.7f;
+        float distance = 1f;
 
         if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
         {

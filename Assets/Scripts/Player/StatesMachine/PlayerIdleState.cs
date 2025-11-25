@@ -23,13 +23,13 @@ public class PlayerIdleState : PlayerBaseState
     }
     public override void CheckSwichStates()
     {
+        if (Ctx.IsMovementPressed && Ctx.IsRunPressed)
+        {
+            SwitchState(Factory.Run());
+        }
         if (Ctx.IsMovementPressed)
         {
             SwitchState(Factory.Walk());
-        }
-        else if (Ctx.IsMovementPressed && Ctx.IsRunPressed)
-        {
-            SwitchState(Factory.Run());
         }
 
     }

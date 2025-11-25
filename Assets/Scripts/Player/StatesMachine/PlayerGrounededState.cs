@@ -50,8 +50,9 @@ public class PlayerGrounededState : PlayerBaseState, IRootState
             SwitchState(Factory.Jump());
             return;
         }
-
-        // Si ya dejamos de estar grounded, esperamos un pequeño tiempo antes de cambiar a Fall
+        
+       
+        
         if (!Ctx.CharacterController.isGrounded)
         {
             notGroundedTimer += Time.deltaTime;
@@ -61,15 +62,16 @@ public class PlayerGrounededState : PlayerBaseState, IRootState
                 return;
             }
         }
-        else if (Ctx.IsTouchingPushBox && Ctx.IsPushPressed && Ctx.IsMovementPressed)
-        {
-            SwitchState(Factory.Push());
-            return;
-        }
         else
         {
             notGroundedTimer = 0f;
         }
+        if (Ctx.IsTouchingPushBox && Ctx.IsPushPressed && Ctx.IsMovementPressed)
+        {
+            SwitchState(Factory.Push());
+            return;
+        }
+
     }
     public override void InitializeSubState()
     {
