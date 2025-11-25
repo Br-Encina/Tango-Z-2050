@@ -8,6 +8,8 @@ public class PlayerStateMachine : MonoBehaviour
     public CharacterController CharacterController { get { return characterController; } }
     Animator animator;
 
+    #region Movement Variables
+
     int isWalkingHash;
     int isRunningHash;
 
@@ -21,24 +23,12 @@ public class PlayerStateMachine : MonoBehaviour
     float rotationFactorPerFrame = 1.0f;
     float runMultipler = 3f;
     float gravity = -9.8f;
-    
 
-    bool isJumpPressed = false;
-    float initialJumpVelocity;
-    float maxJumpHeight = 2f;
-    float maxJumpTime = 0.75f;
-    bool isJumping = false;
-    int isJumpingHash;
-    bool requireNewJumpPress = false;
-    public bool RequireNewJumpPress { get { return requireNewJumpPress; } set { requireNewJumpPress = value; } }
-    public bool IsJumping { get { return isJumping; } set { isJumping = value; } }
-    public int IsJumpingHash { get { return isJumpingHash; } }
-    public bool IsJumpPressed { get { return isJumpPressed; } set { isJumpPressed = value; } }
+
     public float CurrentMovementY { get { return currentMovement.y; } set { currentMovement.y = value; } }
     public float CurrentMovementZ { get { return currentMovement.z; } set { currentMovement.z = value; } }
     public float ApliedMovementY { get { return appliedMovement.y; } set { appliedMovement.y = value; } }
     public Animator Animator { get { return animator; } }
-    public float InitialJumpVelocity { get { return initialJumpVelocity; } }
     public float Gravity { get { return gravity; } }
     
     public bool IsRunPressed { get { return isRunPressed; } }
@@ -50,7 +40,24 @@ public class PlayerStateMachine : MonoBehaviour
     public Vector3 CurrentMovementInput { get { return currentMovementInput; } }
     public float RunMultipler { get { return runMultipler; } }
 
-    //Push Box Interaction
+    #endregion
+
+    #region Jump Variables
+    bool isJumpPressed = false;
+    float initialJumpVelocity;
+    float maxJumpHeight = 2f;
+    float maxJumpTime = 0.75f;
+    bool isJumping = false;
+    int isJumpingHash;
+    bool requireNewJumpPress = false;
+    public bool RequireNewJumpPress { get { return requireNewJumpPress; } set { requireNewJumpPress = value; } }
+    public bool IsJumping { get { return isJumping; } set { isJumping = value; } }
+    public int IsJumpingHash { get { return isJumpingHash; } }
+    public bool IsJumpPressed { get { return isJumpPressed; } set { isJumpPressed = value; } }
+    public float InitialJumpVelocity { get { return initialJumpVelocity; } }
+    #endregion
+
+    #region Push Box Interaction
     bool isPushPressed = false;
     public bool IsPushPressed { get { return isPushPressed; } }
     bool isTouchingPushBox = false;
@@ -64,10 +71,23 @@ public class PlayerStateMachine : MonoBehaviour
     int isPushingHash;
     public int IsPushingHash { get { return isPushingHash; } set { isPushingHash = value; } }
 
+    #endregion
 
+    #region Aim Variables
 
+    int isAimingHash;
+    public int IsAimingHash { get { return isAimingHash; } }
+    public bool IsAimPressed { get { return isAimPressed; } set { isAimPressed = value; } }
 
+    bool isAimPressed = false;
 
+    bool isShootpressed = false;
+    public bool IsShootPressed { get { return isShootpressed; } set { isShootpressed = value; } }
+
+    int shootTriggerHash;
+    public int ShootTriggerHash { get { return shootTriggerHash; } }
+
+    #endregion
 
     PlayerBaseState currentState;
     public PlayerBaseState CurrentState { get { return currentState; } set { currentState = value; } }
@@ -94,6 +114,9 @@ public class PlayerStateMachine : MonoBehaviour
         isRunningHash = Animator.StringToHash("isRunning");
         isJumpingHash = Animator.StringToHash("isJumping");
         isPushingHash = Animator.StringToHash("isPushing");
+        isAimingHash = Animator.StringToHash("isAiming");
+        shootTriggerHash = Animator.StringToHash("shootTrigger");
+
 
         action.Player.Move.started += onMovementInput;
         action.Player.Move.canceled += onMovementInput;
@@ -104,6 +127,10 @@ public class PlayerStateMachine : MonoBehaviour
         action.Player.Jump.canceled += onJump;
         action.Player.Push.started += onPush;
         action.Player.Push.canceled += onPush;
+        action.Player.Aim.started += onAim;
+        action.Player.Aim.canceled += onAim;
+        action.Player.Attack.started += onShoot;
+        action.Player.Attack.canceled += onShoot;
 
 
         setupJumpVariables();
@@ -150,11 +177,14 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-    void setupJumpVariables()
+    void onShoot(InputAction.CallbackContext context)
     {
-        float timeToApex = maxJumpTime / 2;
-        gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
-        initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+        isShootpressed = context.ReadValueAsButton();
+    }
+
+    void onAim(InputAction.CallbackContext context)
+    {
+        isAimPressed = context.ReadValueAsButton();
     }
 
     void onPush(InputAction.CallbackContext context)
@@ -181,6 +211,12 @@ public class PlayerStateMachine : MonoBehaviour
         currentPushBox = null;
     }
 
+    void setupJumpVariables()
+    {
+        float timeToApex = maxJumpTime / 2;
+        gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+        initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+    }
     void onJump(InputAction.CallbackContext context)
     {
         //isJumpPressed = context.ReadValueAsButton();

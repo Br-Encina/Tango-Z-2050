@@ -10,10 +10,13 @@ enum PlayerStates
     Run,
     Walk,
     Fall,
-    Push
+    Push,
+    Aim,
+    Aimidle,
+    Shoot,
 }
 
-public class PlayerStateFactory 
+public class PlayerStateFactory
 {
     private PlayerStateMachine _context;
 
@@ -28,6 +31,9 @@ public class PlayerStateFactory
         _states[PlayerStates.Walk] = new PlayerWalkState(_context, this);
         _states[PlayerStates.Fall] = new PlayerFallState(_context, this);
         _states[PlayerStates.Push] = new PlayerPushState(_context, this);
+        _states[PlayerStates.Aim] = new PlayerAimState(_context, this);
+        _states[PlayerStates.Aimidle] = new PlayerAimIdleState(_context, this);
+        _states[PlayerStates.Shoot] = new PlayerShootState(_context, this);
 
     }
 
@@ -58,5 +64,18 @@ public class PlayerStateFactory
     public PlayerBaseState Push()
     {
         return _states[PlayerStates.Push];
+    }
+    public PlayerBaseState Aim()
+    {
+        return _states[PlayerStates.Aim];
+    }
+    public PlayerBaseState AimIdle()
+    {
+        return _states[PlayerStates.Aimidle];
+
+    }
+    public PlayerBaseState Shoot()
+    {
+        return _states[PlayerStates.Shoot];
     }
 }
