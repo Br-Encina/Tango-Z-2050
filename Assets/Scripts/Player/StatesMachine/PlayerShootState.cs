@@ -11,8 +11,10 @@ public class PlayerShootState : PlayerBaseState
 
     public override void EnterState()
     {
-        Ctx.Animator.SetTrigger(Ctx.ShootTriggerHash);
+        //Ctx.Animator.SetTrigger(Ctx.ShootTriggerHash);
+        EventManager.Instance.OnShootEvent.Invoke();
         ShootRay();
+
         shootTimer = shootDuration;
     }
 
