@@ -14,14 +14,45 @@ public class PlayerAimState : PlayerBaseState/*, IRootState*/
 
     public override void EnterState()
     {
-        Ctx.Animator.SetBool(Ctx.IsAimingHash, true);
+        if (!Ctx.IsMovementPressed) {
+            Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
+
+            
+        } 
+        if (!Ctx.IsRunPressed && !Ctx.IsMovementPressed) {
+            Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
+        }
+        
+            Ctx.Animator.SetBool(Ctx.IsAimingHash, true);
 
         InitializeSubState();
     }
 
     public override void UpdateState()
     {
-        Ctx.ApliedMovementZ = 0;
+        if (!Ctx.IsMovementPressed)
+        {
+            Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
+
+
+        }
+        if (!Ctx.IsRunPressed && !Ctx.IsMovementPressed)
+        {
+            Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
+        }
+        if (Ctx.IsMovementPressed && !Ctx.IsAimPressed)
+        {
+           
+            if (Ctx.IsRunPressed)
+            {
+                Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
+                Ctx.Animator.SetBool(Ctx.IsRunningHash, true);
+                
+            } else
+                Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
+        }
+
+            Ctx.ApliedMovementZ = 0;
         
         RotateArmsTowardMouse();
         RotateArms();
@@ -31,6 +62,8 @@ public class PlayerAimState : PlayerBaseState/*, IRootState*/
     public override void ExitState()
     {
         Ctx.Animator.SetBool(Ctx.IsAimingHash, false);
+
+      
     }
 
     public override void CheckSwichStates()

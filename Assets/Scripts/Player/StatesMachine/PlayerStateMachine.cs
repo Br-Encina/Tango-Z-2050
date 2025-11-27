@@ -94,6 +94,16 @@ public class PlayerStateMachine : MonoBehaviour
 
     #endregion
 
+    #region Climb Variables
+
+    public bool IsTouchingLadder;
+    Ladder CurrentLadder;
+
+    public float LadderSpeed = 2f;
+    public bool IsClimbingPressed;
+
+    #endregion
+
     PlayerBaseState currentState;
     public PlayerBaseState CurrentState { get { return currentState; } set { currentState = value; } }
    
@@ -110,6 +120,8 @@ public class PlayerStateMachine : MonoBehaviour
         action = new InputSystem_Actions();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+
+        //CurrentLadder = Find
         
 
         states = new PlayerStateFactory(this);

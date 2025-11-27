@@ -24,7 +24,8 @@ public class WeaponController : MonoBehaviour
     }
     public void Shoot()
     {
-        Instantiate(flashEffect, nozzle.position, nozzle.rotation);
+        GameObject flashClone = Instantiate(flashEffect, nozzle.position, nozzle.rotation);
+        Destroy(flashClone, 0.1f);
         audioShoot.Play();
     }
 }
