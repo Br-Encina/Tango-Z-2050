@@ -96,11 +96,11 @@ public class PlayerStateMachine : MonoBehaviour
 
     #region Climb Variables
 
-    public bool IsTouchingLadder;
+     bool IsTouchingLadder;
     Ladder CurrentLadder;
 
-    public float LadderSpeed = 2f;
-    public bool IsClimbingPressed;
+    float LadderSpeed = 2f;
+    bool IsClimbingPressed;
 
     #endregion
 
