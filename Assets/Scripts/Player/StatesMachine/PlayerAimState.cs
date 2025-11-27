@@ -55,7 +55,7 @@ public class PlayerAimState : PlayerBaseState/*, IRootState*/
             Ctx.ApliedMovementZ = 0;
         
         RotateArmsTowardMouse();
-        RotateArms();
+        //RotateArms();
         CheckSwichStates();
     }
 
@@ -104,11 +104,11 @@ public class PlayerAimState : PlayerBaseState/*, IRootState*/
 
     }
 
-    void RotateArms()
-    {
-        armAngle += Input.GetAxis("Mouse Y") * armSpeed * Time.deltaTime;
-        armAngle = Mathf.Clamp(armAngle, -10f, 10f);
-        Ctx.Spine2.localRotation = Quaternion.Euler(-armAngle,0f,0f);
+    //void RotateArms()
+    //{
+    //    armAngle += Input.GetAxis("Mouse Y") * armSpeed * Time.deltaTime;
+    //    armAngle = Mathf.Clamp(armAngle, -10f, 10f);
+    //    Ctx.Spine2.localRotation = Quaternion.Euler(-armAngle,0f,0f);
 
-    }
+    //}
 }

@@ -9,8 +9,8 @@ public class PlayerStateMachine : MonoBehaviour
     public CharacterController CharacterController { get { return characterController; } }
     Animator animator;
 
-    [SerializeField] Transform spine2;
-    public Transform Spine2 { get { return spine2; } set { spine2 = value; } }
+    //[SerializeField] Transform spine2;
+    //public Transform Spine2 { get { return spine2; } set { spine2 = value; } }
 
     #region Movement Variables
 

@@ -45,6 +45,7 @@ public class PlayerPushState : PlayerBaseState, IRootState
     {
         // Desactivar animación
         Ctx.Animator.SetBool(Ctx.IsPushingHash, false);
+        
     }
 
     public override void CheckSwichStates()

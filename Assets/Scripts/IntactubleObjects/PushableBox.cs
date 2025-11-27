@@ -7,14 +7,22 @@ public class PushableBox : MonoBehaviour
 
     Rigidbody rb;
 
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
+        rb.isKinematic = true;
     }
+
 
     public void Push(Vector3 direction)
     {
-        rb.AddForce(direction * pushForce, ForceMode.Force);
+        
+        //rb.AddForce(direction * pushForce, ForceMode.Force);
+        rb.MovePosition(transform.position + direction * Time.deltaTime);
     }
+
+    
 }
