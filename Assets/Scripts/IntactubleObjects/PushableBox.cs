@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -24,5 +25,17 @@ public class PushableBox : MonoBehaviour
         rb.MovePosition(transform.position + direction * Time.deltaTime);
     }
 
-    
+    public IEnumerator Falling()
+    {
+       
+            rb.isKinematic = false;
+            yield return new WaitForSeconds(2);
+            rb.isKinematic = true;
+        
+    }
+
+    public void TriggerFall()
+    {
+        StartCoroutine(Falling());
+    }
 }

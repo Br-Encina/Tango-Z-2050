@@ -13,6 +13,7 @@ public class EnemyIdle : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         enemyChase = GetComponent<EnemyChase>();
+        
     }
 
     private void Update()
@@ -22,7 +23,7 @@ public class EnemyIdle : MonoBehaviour
         if (!activated && distance <= detectionRange)
         {
             enemyChase.ActivateEnemy();
-            activated = true; 
+            activated = true;
         }
     }
 }

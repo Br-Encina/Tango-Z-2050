@@ -7,21 +7,29 @@ public class EnemyChase : MonoBehaviour
     [Header("Chase Stats")]
     [SerializeField] private float updateRate;
     [SerializeField] private float attackRange;
+    [SerializeField] private GameObject attackHitBox;
 
     private Transform player;
     private NavMeshAgent nav;
     private Coroutine chaseRoutine;
+    private Animator animator;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         nav = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     public void ActivateEnemy()
     {
-        if (chaseRoutine == null) 
+        
+        if (chaseRoutine == null)
+        {
             chaseRoutine = StartCoroutine(Chase());
+            animator.SetBool("Activated", true);
+        }
+           
     }
 
     public void DeactivateEnemy()
@@ -30,6 +38,7 @@ public class EnemyChase : MonoBehaviour
         {
             StopCoroutine(chaseRoutine);
             chaseRoutine = null;
+            animator.SetBool("Activated", false);
         }
     }
 
@@ -41,10 +50,25 @@ public class EnemyChase : MonoBehaviour
 
             if (!nav.pathPending && nav.remainingDistance <= attackRange)
             {
-                //Faltaria la logica del ataque
+                Attack();
             }
 
             yield return new WaitForSeconds(updateRate);
         }
+    }
+
+    void Attack()
+    {
+        animator.SetTrigger("Attack");
+    }
+
+    void EnableHitBox()
+    {
+        attackHitBox.SetActive(true);
+    }
+
+    void DisableHitBox()
+    {
+        attackHitBox.SetActive(false);
     }
 }
