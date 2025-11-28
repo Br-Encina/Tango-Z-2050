@@ -9,6 +9,8 @@ public class EnemyChase : MonoBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] private GameObject attackHitBox;
 
+    private bool attacking = false;
+
     private Transform player;
     private NavMeshAgent nav;
     private Coroutine chaseRoutine;
@@ -46,10 +48,18 @@ public class EnemyChase : MonoBehaviour
     {
         while (true)
         {
-            nav.SetDestination(player.position);
+            float dist = Vector3.Distance(transform.position, player.position);
 
-            if (!nav.pathPending && nav.remainingDistance <= attackRange)
+            
+            if (dist > attackRange)
             {
+                nav.isStopped = false;
+                nav.SetDestination(player.position);
+            }
+            else
+            {
+                
+                nav.isStopped = true;
                 Attack();
             }
 
@@ -59,7 +69,15 @@ public class EnemyChase : MonoBehaviour
 
     void Attack()
     {
+        if (attacking) return;
+
+        attacking = true;
         animator.SetTrigger("Attack");
+    }
+
+    void EndAttack()
+    {
+        attacking = false;
     }
 
     void EnableHitBox()
