@@ -34,5 +34,5 @@ public class EventManager : MonoBehaviour
     public UnityEvent OnPickGunEvent = new UnityEvent();
     #endregion
 
-    
+    public UnityEvent OnLeverActivated = new UnityEvent();
 }
