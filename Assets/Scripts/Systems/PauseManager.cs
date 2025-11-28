@@ -26,8 +26,8 @@ public class PauseManager : MonoBehaviour
         musicSlider.value = musicVal;
         sfxSlider.value = sfxVal;
 
-        audioMixer.SetFloat("MusicVolume", musicVal);
-        audioMixer.SetFloat("SFXVolume", sfxVal);
+        audioMixer.SetFloat("Music", musicVal);
+        audioMixer.SetFloat("Sfx", sfxVal);
 
         // Eventos sliders
         musicSlider.onValueChanged.AddListener(SetMusicVolume);

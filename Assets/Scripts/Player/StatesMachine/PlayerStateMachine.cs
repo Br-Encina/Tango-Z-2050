@@ -78,7 +78,7 @@ public class PlayerStateMachine : MonoBehaviour
     #endregion
 
     #region Aim Variables
-    bool gunIsPicked = false;
+    bool gunIsPicked = true;
     public bool GunIsPickeded { get { return gunIsPicked; } set { gunIsPicked = value; } }
     int isAimingHash;
     public int IsAimingHash { get { return isAimingHash; } }
