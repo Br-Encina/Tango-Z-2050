@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyChase : MonoBehaviour
+public class EnemyChase : MonoBehaviour, IInteractuable
 {
     [Header("Chase Stats")]
     [SerializeField] private float updateRate;
@@ -49,21 +49,19 @@ public class EnemyChase : MonoBehaviour
         while (true)
         {
             float dist = Vector3.Distance(transform.position, player.position);
-
-            
-            if (dist > attackRange)
+ 
+            if (dist < attackRange)
+            {
+                nav.isStopped = true;
+                Attack();
+            }
+            else
             {
                 nav.isStopped = false;
                 nav.SetDestination(player.position);
             }
-            else
-            {
-                
-                nav.isStopped = true;
-                Attack();
-            }
 
-            yield return new WaitForSeconds(updateRate);
+                yield return new WaitForSeconds(updateRate);
         }
     }
 
@@ -72,12 +70,13 @@ public class EnemyChase : MonoBehaviour
         if (attacking) return;
 
         attacking = true;
-        animator.SetTrigger("Attack");
+        animator.SetBool("Attack", attacking);
     }
 
     void EndAttack()
     {
         attacking = false;
+        animator.SetBool("Attack", attacking);
     }
 
     void EnableHitBox()
@@ -88,5 +87,15 @@ public class EnemyChase : MonoBehaviour
     void DisableHitBox()
     {
         attackHitBox.SetActive(false);
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    void IInteractuable.OnShootHit()
+    {
+        Death();
     }
 }
