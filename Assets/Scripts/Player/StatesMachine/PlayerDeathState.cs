@@ -15,16 +15,14 @@ public class PlayerDeathState : PlayerBaseState
 
         Ctx.IsDead = true;
 
-        // Detener movimiento
-        Ctx.ApliedMovementZ = 0;
-        Ctx.ApliedMovementY = 0;
+        //// Detener movimiento
+        //Ctx.ApliedMovementZ = 0;
+        //Ctx.ApliedMovementY = 0;
 
         // Activar animación
         Ctx.Animator.SetBool(Ctx.IsDeadHash, true);
 
-        // Mostrar UI
-        DeathUIManager ui = GameObject.FindAnyObjectByType<DeathUIManager>();
-        ui.ShowDeathScreen();
+        
     }
 
     public override void UpdateState()
@@ -44,4 +42,6 @@ public class PlayerDeathState : PlayerBaseState
     }
 
     public override void InitializeSubState() { }
+
+   
 }

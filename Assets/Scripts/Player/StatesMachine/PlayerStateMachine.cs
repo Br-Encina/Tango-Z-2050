@@ -112,6 +112,8 @@ public class PlayerStateMachine : MonoBehaviour
     int isDeadHash;
     public int IsDeadHash { get { return isDeadHash; } set { isDeadHash = value; } }
     #endregion
+
+
     PlayerBaseState currentState;
     public PlayerBaseState CurrentState { get { return currentState; } set { currentState = value; } }
    
@@ -274,6 +276,12 @@ public class PlayerStateMachine : MonoBehaviour
         appliedMovement.z = currentMovementInput.x * runMultipler;
         
         isMovementPressed = currentMovementInput.x != 0;
+    }
+
+    public void Deathpanel()
+    {
+        DeathUIManager ui = GameObject.FindAnyObjectByType<DeathUIManager>();
+        ui.ShowDeathScreen();
     }
 
     private void OnEnable()

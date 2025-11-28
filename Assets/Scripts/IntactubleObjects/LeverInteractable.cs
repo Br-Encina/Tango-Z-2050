@@ -4,12 +4,18 @@ using UnityEngine.Events;
 public class LeverInteractable : InteractBase
 {
     [Header("Opcional: animación")]
-    public Animator leverAnimator;
+    Animator leverAnimator;
+    [SerializeField] GameObject door;
 
-   
-   
+
+
 
     bool isUsed = false;
+
+    private void Start()
+    {
+        leverAnimator = GetComponent<Animator>();
+    }
 
     public override void OnInteract(PlayerStateMachine player)
     {
@@ -22,7 +28,7 @@ public class LeverInteractable : InteractBase
             leverAnimator.SetTrigger("Activate");
 
         
-        EventManager.Instance.OnLeverActivated.Invoke();
+       
 
         Debug.Log("Palanca activada!");
 

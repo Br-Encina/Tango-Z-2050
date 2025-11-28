@@ -8,6 +8,7 @@ public class PushableBox : MonoBehaviour
     public float pushForce = 5f;
     private bool isFalling;
     private PlayerStateMachine player;
+    Collider Collider;
 
     Rigidbody rb;
 
@@ -16,6 +17,7 @@ public class PushableBox : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        Collider = GetComponent<Collider>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.isKinematic = true;
         player = FindAnyObjectByType<PlayerStateMachine>();
@@ -59,10 +61,11 @@ public class PushableBox : MonoBehaviour
 
         if (collision.gameObject.CompareTag("BoxPlayer"))
         {
-            Debug.Log("Player detectado");
+            rb.isKinematic = true;
             if (player != null)
             {
                 player.IsDead = true;
+                
             }
         }
     }
