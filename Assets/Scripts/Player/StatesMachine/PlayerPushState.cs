@@ -61,7 +61,12 @@ public class PlayerPushState : PlayerBaseState, IRootState
             SwitchState(Factory.Grounded());
             return;
         }
-        
+        if (Ctx.IsDead)
+        {
+            SwitchState(Factory.Death());
+            return;
+        }
+
 
 
 

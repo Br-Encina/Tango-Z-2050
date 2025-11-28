@@ -78,6 +78,12 @@ public class PlayerGrounededState : PlayerBaseState, IRootState
             return;
         }
 
+        if (Ctx.IsDead)
+        {
+            SwitchState(Factory.Death());
+            return;
+        }
+
     }
     public override void InitializeSubState()
     {

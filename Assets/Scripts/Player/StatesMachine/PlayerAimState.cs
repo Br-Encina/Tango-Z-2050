@@ -73,6 +73,11 @@ public class PlayerAimState : PlayerBaseState/*, IRootState*/
             SwitchState(Factory.Grounded());
             return;
         }
+        if (Ctx.IsDead)
+        {
+            SwitchState(Factory.Death());
+            return;
+        }
     }
 
     public override void InitializeSubState()

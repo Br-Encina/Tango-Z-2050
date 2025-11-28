@@ -34,6 +34,11 @@ public class PlayerJumpState : PlayerBaseState, IRootState
         {
             SwitchState(Factory.Grounded());
         }
+        if (Ctx.IsDead)
+        {
+            SwitchState(Factory.Death());
+            return;
+        }
     }
     public override void InitializeSubState()
     {

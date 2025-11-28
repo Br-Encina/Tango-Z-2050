@@ -104,6 +104,14 @@ public class PlayerStateMachine : MonoBehaviour
 
     #endregion
 
+    #region Death Variables
+
+     bool isDead = false;
+    public bool IsDead { get { return isDead; } set { isDead = value; } }
+
+    int isDeadHash;
+    public int IsDeadHash { get { return isDeadHash; } set { isDeadHash = value; } }
+    #endregion
     PlayerBaseState currentState;
     public PlayerBaseState CurrentState { get { return currentState; } set { currentState = value; } }
    
@@ -133,6 +141,7 @@ public class PlayerStateMachine : MonoBehaviour
         isJumpingHash = Animator.StringToHash("isJumping");
         isPushingHash = Animator.StringToHash("isPushing");
         isAimingHash = Animator.StringToHash("isAiming");
+        isDeadHash = Animator.StringToHash("isDead");
         //shootTriggerHash = Animator.StringToHash("shootTrigger");
 
 

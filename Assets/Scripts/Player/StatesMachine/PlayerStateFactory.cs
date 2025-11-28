@@ -14,6 +14,7 @@ enum PlayerStates
     Aim,
     Aimidle,
     Shoot,
+    Death
 }
 
 public class PlayerStateFactory
@@ -34,6 +35,7 @@ public class PlayerStateFactory
         _states[PlayerStates.Aim] = new PlayerAimState(_context, this);
         _states[PlayerStates.Aimidle] = new PlayerAimIdleState(_context, this);
         _states[PlayerStates.Shoot] = new PlayerShootState(_context, this);
+        _states[PlayerStates.Death] = new PlayerDeathState(_context, this);
 
     }
 
@@ -77,5 +79,9 @@ public class PlayerStateFactory
     public PlayerBaseState Shoot()
     {
         return _states[PlayerStates.Shoot];
+    }
+    public PlayerBaseState Death()
+    {
+        return _states[PlayerStates.Death];
     }
 }
