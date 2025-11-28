@@ -3,16 +3,16 @@ using UnityEngine;
 public class PlayerRailConstraint : MonoBehaviour
 {
     [Header("Rail Settings")]
-    public bool railEnabled = true;          // ¿El rail está activo?
-    public float targetX = 0f;               // La posición X que debe mantener
-    public float smooth = 15f;               // Qué tan suave se corrige
+    public bool railEnabled = true;          
+    public float targetX = 0f;               
+    public float smooth = 15f;               
 
     Transform player;
 
     private void Start()
     {
         player = transform;
-        targetX = player.position.x; // Se congela X inicial automáticamente
+        targetX = player.position.x; 
     }
 
     private void LateUpdate()

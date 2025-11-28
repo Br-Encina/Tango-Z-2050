@@ -9,8 +9,7 @@ public class PlayerStateMachine : MonoBehaviour
     public CharacterController CharacterController { get { return characterController; } }
     Animator animator;
 
-    //[SerializeField] Transform spine2;
-    //public Transform Spine2 { get { return spine2; } set { spine2 = value; } }
+    
 
     #region Movement Variables
 
@@ -79,7 +78,8 @@ public class PlayerStateMachine : MonoBehaviour
     #endregion
 
     #region Aim Variables
-
+    bool gunIsPicked = false;
+    public bool GunIsPickeded { get { return gunIsPicked; } set { gunIsPicked = value; } }
     int isAimingHash;
     public int IsAimingHash { get { return isAimingHash; } }
     public bool IsAimPressed { get { return isAimPressed; } set { isAimPressed = value; } }
@@ -194,7 +194,10 @@ public class PlayerStateMachine : MonoBehaviour
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame);
         }
     }
-
+    //public void PíckGun()
+    //{
+    //    gunIsPicked = true;
+    //}
     void onShoot(InputAction.CallbackContext context)
     {
         isShootpressed = context.ReadValueAsButton();
@@ -266,11 +269,13 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnEnable()
     {
+        
         action.Player.Enable();
     }
 
     private void OnDisable()
     {
+        
         action.Player.Disable();
     }
 
@@ -283,5 +288,5 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-
+    
 }

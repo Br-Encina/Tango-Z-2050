@@ -72,7 +72,7 @@ public class PlayerGrounededState : PlayerBaseState, IRootState
             return;
         }
 
-        if (Ctx.IsAimPressed)
+        if (Ctx.IsAimPressed && Ctx.GunIsPickeded)
         {
             SwitchState(Factory.Aim());
             return;

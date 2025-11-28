@@ -31,7 +31,8 @@ public class EventManager : MonoBehaviour
 
     #region Shooting Events
     public UnityEvent OnShootEvent = new UnityEvent();
+    public UnityEvent OnPickGunEvent = new UnityEvent();
     #endregion
 
-    public UnityEvent OnPushEvent = new UnityEvent();
+    
 }
