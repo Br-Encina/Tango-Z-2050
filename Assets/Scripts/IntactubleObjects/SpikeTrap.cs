@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(MeshCollider))]
+[RequireComponent(typeof(BoxCollider))]
 public class SpikeTrap : MonoBehaviour
 {
     int damage = 9999; // daño letal
@@ -13,7 +13,7 @@ public class SpikeTrap : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("BoxPlayer"))
         {
             PlayerHealth health = other.GetComponent<PlayerHealth>();
             if (health != null)

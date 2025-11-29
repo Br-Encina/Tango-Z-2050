@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
-
+[RequireComponent(typeof(BoxCollider))]
 public class LeverInteractable : InteractBase
 {
-    [Header("Opcional: animación")]
+   
     Animator leverAnimator;
-    [SerializeField] GameObject door;
+    public UnityEvent onLever;
 
 
 
@@ -22,13 +22,13 @@ public class LeverInteractable : InteractBase
         if (isUsed) return; 
 
         isUsed = true;
-
-        // animación opcional
-        if (leverAnimator != null)
-            leverAnimator.SetTrigger("Activate");
+        
 
         
-       
+        
+
+
+        onLever?.Invoke();
 
         Debug.Log("Palanca activada!");
 
