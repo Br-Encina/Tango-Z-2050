@@ -14,10 +14,13 @@ public class PlayerShootState : PlayerBaseState
         if (!Ctx.HasAmmo)
         {
             Debug.Log("Sin balas!");
+            EventManager.Instance.BulletEmpty.Invoke();
             SwitchState(Factory.AimIdle());
             return;
         }
+        Ctx.CurrentAmmo --;
         EventManager.Instance.OnShootEvent.Invoke();
+        EventManager.Instance.UpdateBulletsEvent.Invoke(Ctx.CurrentAmmo, Ctx.MaxAmmo);
         ShootRay();
 
         shootTimer = shootDuration;

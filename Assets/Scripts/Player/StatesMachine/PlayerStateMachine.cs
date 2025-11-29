@@ -95,7 +95,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     int maxAmmo = 10;
     public int MaxAmmo { get { return maxAmmo; } }
-    int currentAmmo;
+    int currentAmmo = 10;
     public int CurrentAmmo { get { return currentAmmo; } set { currentAmmo = value; } }
     bool hasAmmo => currentAmmo > 0;
     public bool HasAmmo { get { return hasAmmo; } }

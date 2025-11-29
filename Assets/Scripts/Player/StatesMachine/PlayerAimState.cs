@@ -83,7 +83,9 @@ public class PlayerAimState : PlayerBaseState/*, IRootState*/
     public override void InitializeSubState()
     {
         if (Ctx.IsShootPressed)
+        {
             SetSubState(Factory.Shoot());
+        }
         else
             SetSubState(Factory.AimIdle());
     }

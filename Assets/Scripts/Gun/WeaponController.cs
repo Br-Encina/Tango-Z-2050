@@ -5,6 +5,7 @@ public class WeaponController : MonoBehaviour
     Transform nozzle;
 
     [SerializeField] GameObject flashEffect;
+    [SerializeField] AudioClip[] audioClips  = new AudioClip[2];
     AudioSource audioShoot;
 
     private void Start()
@@ -16,6 +17,7 @@ public class WeaponController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.Instance.OnShootEvent.AddListener(Shoot);
+        EventManager.Instance.BulletEmpty.AddListener(PlayNoAmmoSound);
     }
 
     private void OnDisable()
@@ -26,6 +28,16 @@ public class WeaponController : MonoBehaviour
     {
         GameObject flashClone = Instantiate(flashEffect, nozzle.position, nozzle.rotation);
         Destroy(flashClone, 0.1f);
-        audioShoot.Play();
+        audioShoot.PlayOneShot(audioClips[0]);
+    }
+
+    public void PlayNoAmmoSound()
+    {
+        
+        
+
+            audioShoot.PlayOneShot(audioClips[1]);
+        
+        
     }
 }
