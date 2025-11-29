@@ -6,7 +6,9 @@ public class EnemyAttack : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-           // other.GetComponent<Player>
+            PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+            playerHealth.TakeDamage(25);
+
         }
     }
 }

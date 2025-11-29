@@ -54,9 +54,9 @@ public class PushableBox : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            IInteractuable enemy = collision.gameObject.GetComponent<IInteractuable>();
+            EnemyChase enemy = collision.gameObject.GetComponent<EnemyChase>();
 
-            enemy.OnShootHit();
+            enemy.DeactivateEnemy();
         }
 
         if (collision.gameObject.CompareTag("BoxPlayer"))

@@ -8,6 +8,7 @@ public class EnemyChase : MonoBehaviour, IInteractuable
     [SerializeField] private float updateRate;
     [SerializeField] private float attackRange;
     [SerializeField] private GameObject attackHitBox;
+    [SerializeField] private EnemyHealth EnemyHealth;
 
     private bool attacking = false;
 
@@ -15,12 +16,17 @@ public class EnemyChase : MonoBehaviour, IInteractuable
     private NavMeshAgent nav;
     private Coroutine chaseRoutine;
     private Animator animator;
+    private BoxCollider bC;
+    private Rigidbody rb;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         nav = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        EnemyHealth = GetComponent<EnemyHealth>();
+        bC = GetComponent<BoxCollider>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public void ActivateEnemy()
@@ -40,7 +46,9 @@ public class EnemyChase : MonoBehaviour, IInteractuable
         {
             StopCoroutine(chaseRoutine);
             chaseRoutine = null;
-            animator.SetBool("Activated", false);
+            animator.SetBool("Death", true);
+            bC.isTrigger = true;
+            rb.isKinematic = true;
         }
     }
 
@@ -89,13 +97,17 @@ public class EnemyChase : MonoBehaviour, IInteractuable
         attackHitBox.SetActive(false);
     }
 
-    public void Death()
-    {
-        Destroy(gameObject);
-    }
-
     void IInteractuable.OnShootHit()
     {
-        Death();
+        EnemyHealth.ReceiveDamage(10);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject)
+        {
+            DeactivateEnemy();
+        }
+       
     }
 }
