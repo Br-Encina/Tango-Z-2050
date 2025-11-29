@@ -23,6 +23,8 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth -= amount;
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, maxHealth);
 
+        Debug.Log($"Player received {amount} damage. Current Health: {CurrentHealth}");
+
         if (CurrentHealth <= 0)
         {
             Die();
