@@ -101,13 +101,4 @@ public class EnemyChase : MonoBehaviour, IInteractuable
     {
         EnemyHealth.ReceiveDamage(10);
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject)
-        {
-            DeactivateEnemy();
-        }
-       
-    }
 }
