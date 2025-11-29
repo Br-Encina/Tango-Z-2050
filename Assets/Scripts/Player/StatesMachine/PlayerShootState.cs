@@ -11,7 +11,12 @@ public class PlayerShootState : PlayerBaseState
 
     public override void EnterState()
     {
-        //Ctx.Animator.SetTrigger(Ctx.ShootTriggerHash);
+        if (!Ctx.HasAmmo)
+        {
+            Debug.Log("Sin balas!");
+            SwitchState(Factory.AimIdle());
+            return;
+        }
         EventManager.Instance.OnShootEvent.Invoke();
         ShootRay();
 
