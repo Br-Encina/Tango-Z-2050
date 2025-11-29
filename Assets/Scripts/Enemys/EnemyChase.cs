@@ -8,7 +8,7 @@ public class EnemyChase : MonoBehaviour, IInteractuable
     [SerializeField] private float updateRate;
     [SerializeField] private float attackRange;
     [SerializeField] private GameObject attackHitBox;
-    [SerializeField] private EnemyHealth EnemyHealth;
+    private EnemyHealth EnemyHealth;
 
     private bool attacking = false;
 
