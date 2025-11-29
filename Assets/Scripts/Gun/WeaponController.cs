@@ -23,6 +23,7 @@ public class WeaponController : MonoBehaviour
     private void OnDisable()
     {
         EventManager.Instance.OnShootEvent.AddListener(Shoot);
+        EventManager.Instance.BulletEmpty.RemoveListener(PlayNoAmmoSound);
     }
     public void Shoot()
     {

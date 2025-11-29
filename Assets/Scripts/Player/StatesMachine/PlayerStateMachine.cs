@@ -92,8 +92,9 @@ public class PlayerStateMachine : MonoBehaviour
     int shootTriggerHash;
     public int ShootTriggerHash { get { return shootTriggerHash; } }
 
-
-    int maxAmmo = 10;
+    bool isShooting = false;
+    public bool IsShooting { get { return isShooting; } set { isShooting = value; } }
+    int maxAmmo = 20;
     public int MaxAmmo { get { return maxAmmo; } }
     int currentAmmo;
     public int CurrentAmmo { get { return currentAmmo; } set { currentAmmo = value; } }

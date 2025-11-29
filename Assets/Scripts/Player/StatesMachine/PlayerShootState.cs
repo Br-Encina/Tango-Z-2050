@@ -11,6 +11,8 @@ public class PlayerShootState : PlayerBaseState
 
     public override void EnterState()
     {
+        Ctx.IsShooting = true;
+        
         if (!Ctx.HasAmmo)
         {
             Debug.Log("Sin balas!");
@@ -18,7 +20,7 @@ public class PlayerShootState : PlayerBaseState
             SwitchState(Factory.AimIdle());
             return;
         }
-        
+        Ctx.CurrentAmmo = Ctx.CurrentAmmo - 1;
         EventManager.Instance.OnShootEvent.Invoke();
         EventManager.Instance.UpdateBulletsEvent.Invoke(Ctx.CurrentAmmo, Ctx.MaxAmmo);
         ShootRay();
@@ -32,7 +34,9 @@ public class PlayerShootState : PlayerBaseState
         CheckSwichStates();
     }
 
-    public override void ExitState() { }
+    public override void ExitState() { 
+        Ctx.IsShooting = false;
+    }
 
     public override void CheckSwichStates()
     {
@@ -47,7 +51,7 @@ public class PlayerShootState : PlayerBaseState
     void ShootRay()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        Ctx.CurrentAmmo = Ctx.CurrentAmmo - 1;
+        
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100))
         {

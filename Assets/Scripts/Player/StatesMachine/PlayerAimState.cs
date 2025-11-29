@@ -82,9 +82,10 @@ public class PlayerAimState : PlayerBaseState/*, IRootState*/
 
     public override void InitializeSubState()
     {
-        if (Ctx.IsShootPressed)
+        if (Ctx.IsShootPressed && !Ctx.IsShooting)
         {
-            SetSubState(Factory.Shoot());
+            SwitchState(Factory.Shoot());
+            return;
         }
         else
             SetSubState(Factory.AimIdle());
