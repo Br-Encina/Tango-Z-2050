@@ -3245,6 +3245,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2119213107162945491, guid: e2f763c9193c46d4c99b5aad00855ab9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 284970971}
+    - targetCorrespondingSourceObject: {fileID: 2119213107162945491, guid: e2f763c9193c46d4c99b5aad00855ab9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 284970974}
   m_SourcePrefab: {fileID: 100100000, guid: e2f763c9193c46d4c99b5aad00855ab9, type: 3}
 --- !u!1 &284970970 stripped
 GameObject:
@@ -3348,6 +3351,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &284970974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284970970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181e9ff8e00b80e4cb82393b40e85e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorManager
+  interactCursor: {fileID: 2800000, guid: 52c7b64e71405a54689e74ab952670a3, type: 3}
+  hotspot: {x: 0, y: 0}
 --- !u!1001 &286978995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3869,6 +3886,9 @@ PrefabInstance:
     - {fileID: -7985138789324279588, guid: 1d9f698f227d3104d8a9a497ab39fb03, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1d9f698f227d3104d8a9a497ab39fb03, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 370145456}
     - targetCorrespondingSourceObject: {fileID: -8391222552659086748, guid: 1d9f698f227d3104d8a9a497ab39fb03, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1924833929}
@@ -3879,6 +3899,43 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1121655054}
   m_SourcePrefab: {fileID: 100100000, guid: 1d9f698f227d3104d8a9a497ab39fb03, type: 3}
+--- !u!1 &370145455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1d9f698f227d3104d8a9a497ab39fb03, type: 3}
+  m_PrefabInstance: {fileID: 370145454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &370145456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370145455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.13333334
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: fa52666d20d8b1a4a94f8e851ff0a5b3, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1001 &372143427
 PrefabInstance:
   m_ObjectHideFlags: 0
