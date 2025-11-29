@@ -20,7 +20,8 @@ public class Falling_Plataform : MonoBehaviour
 
         if (other.gameObject.CompareTag("BoxPlayer"))
         {
-            StartCoroutine(FallingPlataform());
+            //StartCoroutine(FallingPlataform());
+            rb.isKinematic = false;
             falled = true;
         }
     }

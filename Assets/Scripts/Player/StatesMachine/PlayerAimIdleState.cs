@@ -3,7 +3,11 @@ public class PlayerAimIdleState : PlayerBaseState
     public PlayerAimIdleState(PlayerStateMachine ctx, PlayerStateFactory factory)
         : base(ctx, factory) { }
 
-    public override void EnterState() { }
+    public override void EnterState() {
+
+        
+
+    }
 
     public override void UpdateState()
     {
@@ -14,7 +18,7 @@ public class PlayerAimIdleState : PlayerBaseState
 
     public override void CheckSwichStates()
     {
-        if (Ctx.IsShootPressed)
+        if (Ctx.IsShootPressed && !Ctx.IsShooting)
         {
             SwitchState(Factory.Shoot());
         }

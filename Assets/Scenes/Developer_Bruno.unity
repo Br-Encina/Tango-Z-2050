@@ -1066,6 +1066,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2f763c9193c46d4c99b5aad00855ab9, type: 3}
+--- !u!1001 &835423648798207491
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7233507110342332476, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233507110342332476, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233507110342332476, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233507110342332476, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233507110342332476, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233507110342332476, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233507110342332476, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233507110342332476, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233507110342332476, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233507110342332476, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010009042242488966, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
+      propertyPath: m_Name
+      value: PressButton
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02cdee74bc2525b4381a396c191f4e62, type: 3}
 --- !u!1001 &2579643433465197410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1144,6 +1201,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8079738538571248268, guid: d8201a909eca8714eab4da288364630e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8196533049690220445, guid: d8201a909eca8714eab4da288364630e, type: 3}
       propertyPath: pushForce
       value: 2.5
@@ -1151,6 +1212,10 @@ PrefabInstance:
     - target: {fileID: 8605804090756021689, guid: d8201a909eca8714eab4da288364630e, type: 3}
       propertyPath: m_Name
       value: PusheableBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605804090756021689, guid: d8201a909eca8714eab4da288364630e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8945879031810483971, guid: d8201a909eca8714eab4da288364630e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1223,3 +1288,4 @@ SceneRoots:
   - {fileID: 155779602}
   - {fileID: 6030520743956431368}
   - {fileID: 821476115}
+  - {fileID: 835423648798207491}

@@ -6,6 +6,7 @@ public class LeverInteractable : InteractBase
    
     Animator leverAnimator;
     public UnityEvent onLever;
+    AudioSource audioSource;
 
 
 
@@ -15,6 +16,7 @@ public class LeverInteractable : InteractBase
     private void Start()
     {
         leverAnimator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void OnInteract(PlayerStateMachine player)
@@ -29,7 +31,7 @@ public class LeverInteractable : InteractBase
 
 
         onLever?.Invoke();
-
+        audioSource.Play();
         Debug.Log("Palanca activada!");
 
         base.OnInteract(player);

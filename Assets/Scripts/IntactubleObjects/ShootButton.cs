@@ -7,9 +7,11 @@ public class ShootButton : MonoBehaviour, IInteractuable
     public UnityEvent onButtonShot;
     Animator animator;
     bool isUsed = false;
+    AudioSource audioS;
 
     private void Start()
     {
+        audioS = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
     }
     public void OnShootHit()
@@ -18,6 +20,7 @@ public class ShootButton : MonoBehaviour, IInteractuable
 
         isUsed = true;
 
+        audioS.Play();
         animator.SetBool("isUsed", true);
         onButtonShot?.Invoke();
     }

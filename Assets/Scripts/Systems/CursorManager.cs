@@ -3,10 +3,11 @@ using UnityEngine.InputSystem;
 
 public class CursorManager : MonoBehaviour
 {
-    [Header("Cursor cuando apunta a un interactuable")]
+    [Header("Cursor Textures")]
+    public Texture2D defaultCursor;
     public Texture2D interactCursor;
 
-    [Header("Hotspot (opcional)")]
+    [Header("Cursor Hotspot")]
     public Vector2 hotspot = Vector2.zero;
 
     Camera cam;
@@ -15,8 +16,8 @@ public class CursorManager : MonoBehaviour
     {
         cam = Camera.main;
 
-        // Asegurar que el cursor arranque con el original del sistema
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        // Cursor predeterminado
+        Cursor.SetCursor(defaultCursor, hotspot, CursorMode.Auto);
     }
 
     private void Update()
@@ -34,13 +35,13 @@ public class CursorManager : MonoBehaviour
 
             if (interact != null)
             {
-                // Cambia al cursor especial de interacción
+                // Cambia al cursor de interacción
                 Cursor.SetCursor(interactCursor, hotspot, CursorMode.Auto);
                 return;
             }
         }
 
-        // Si no hay nada interactuable → vuelve al cursor normal del sistema
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        // Si no hay interactuable bajo el mouse → cursor normal
+        Cursor.SetCursor(defaultCursor, hotspot, CursorMode.Auto);
     }
 }

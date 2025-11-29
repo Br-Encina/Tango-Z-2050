@@ -18,8 +18,8 @@ public class WeaponInfo : MonoBehaviour
     }
     public void UpdateBullet(int newCurrentBullet, int newTotalBullet)
     {
-        newCurrentBullet = newCurrentBullet / 2;
-        newTotalBullet = newTotalBullet / 2;
+        //newCurrentBullet = newCurrentBullet / 2;
+        //newTotalBullet = newTotalBullet / 2;
 
         if (newCurrentBullet <= 0)
         {

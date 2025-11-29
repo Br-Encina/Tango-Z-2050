@@ -34,8 +34,10 @@ public class PlayerShootState : PlayerBaseState
         CheckSwichStates();
     }
 
-    public override void ExitState() { 
+    public override void ExitState() {
         Ctx.IsShooting = false;
+        Ctx.IsShootPressed = false;
+
     }
 
     public override void CheckSwichStates()
