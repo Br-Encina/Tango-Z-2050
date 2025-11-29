@@ -78,7 +78,7 @@ public class PlayerStateMachine : MonoBehaviour
     #endregion
 
     #region Aim Variables
-    bool gunIsPicked = true;
+    bool gunIsPicked = false;
     public bool GunIsPickeded { get { return gunIsPicked; } set { gunIsPicked = value; } }
     int isAimingHash;
     public int IsAimingHash { get { return isAimingHash; } }
@@ -95,7 +95,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     int maxAmmo = 10;
     public int MaxAmmo { get { return maxAmmo; } }
-    int currentAmmo = 10;
+    int currentAmmo;
     public int CurrentAmmo { get { return currentAmmo; } set { currentAmmo = value; } }
     bool hasAmmo => currentAmmo > 0;
     public bool HasAmmo { get { return hasAmmo; } }
@@ -177,6 +177,7 @@ public class PlayerStateMachine : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        currentAmmo = maxAmmo;
         characterController.Move(appliedMovement * Time.deltaTime);
     }
 

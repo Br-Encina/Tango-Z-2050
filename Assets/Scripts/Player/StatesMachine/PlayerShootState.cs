@@ -18,7 +18,7 @@ public class PlayerShootState : PlayerBaseState
             SwitchState(Factory.AimIdle());
             return;
         }
-        Ctx.CurrentAmmo --;
+        
         EventManager.Instance.OnShootEvent.Invoke();
         EventManager.Instance.UpdateBulletsEvent.Invoke(Ctx.CurrentAmmo, Ctx.MaxAmmo);
         ShootRay();
@@ -47,7 +47,7 @@ public class PlayerShootState : PlayerBaseState
     void ShootRay()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        
+        Ctx.CurrentAmmo = Ctx.CurrentAmmo - 1;
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100))
         {

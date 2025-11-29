@@ -3,10 +3,13 @@ using UnityEngine;
 public class WeaponPickup : InteractBase
 {
     public GameObject weaponModel;
+    public GameObject weaponInfo;
+    AudioSource audioSource;
   
     private void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
+        weaponInfo.SetActive( false);
         weaponModel.SetActive(false);
     }
 
@@ -16,6 +19,8 @@ public class WeaponPickup : InteractBase
 
         // Aquí agregás el arma al inventario, o al hand socket
         weaponModel.SetActive(true);
+        weaponInfo.SetActive( true);
+        audioSource.Play();
         //EventManager.Instance.OnPickGunEvent.Invoke();
         player.GunIsPickeded = true;
 
