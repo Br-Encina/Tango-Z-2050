@@ -102,10 +102,12 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: ddf9585e1fd2de74c9397d1dd1cba2cb
+    name: MyExposedParam 2
   - guid: 8cb3c9db75e965b46ba2566a57514ade
-    name: MyExposedParam
+    name: Music
   - guid: 84c9c6e2085f20943b587c71d43f54f1
-    name: MyExposedParam 1
+    name: Sfx
   m_AudioMixerGroupViews:
   - guids:
     - 8b031d2b106ce7d4883308b5cc7401e7

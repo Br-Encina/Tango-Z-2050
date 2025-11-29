@@ -20,8 +20,8 @@ public class PauseManager : MonoBehaviour
         pausePanel.SetActive(false);
 
         // Cargar volumen guardado
-        float musicVal = PlayerPrefs.GetFloat("MusicVolume", 0);
-        float sfxVal = PlayerPrefs.GetFloat("SFXVolume", 0);
+        float musicVal = PlayerPrefs.GetFloat("Music", 0);
+        float sfxVal = PlayerPrefs.GetFloat("Sfx", 0);
 
         musicSlider.value = musicVal;
         sfxSlider.value = sfxVal;
@@ -78,13 +78,13 @@ public class PauseManager : MonoBehaviour
 
     public void SetMusicVolume(float value)
     {
-        audioMixer.SetFloat("MusicVolume", value);
-        PlayerPrefs.SetFloat("MusicVolume", value);
+        audioMixer.SetFloat("Music", value);
+        PlayerPrefs.SetFloat("Music", value);
     }
 
     public void SetSFXVolume(float value)
     {
-        audioMixer.SetFloat("SFXVolume", value);
-        PlayerPrefs.SetFloat("SFXVolume", value);
+        audioMixer.SetFloat("Sfx", value);
+        PlayerPrefs.SetFloat("Sfx", value);
     }
 }
